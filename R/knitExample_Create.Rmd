@@ -1,0 +1,3 @@
+# Start your Rmd document
+
+This is a clean state just for you.

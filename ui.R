@@ -11,7 +11,86 @@ ui <- shinyUI(
       collapsible = TRUE,
       theme = shinytheme("cerulean"),
       
-      # Tab 1 - Create ----
+      # Tab 1 - View ----
+      tabPanel(
+        title = "View",
+        icon = icon("chalkboard"),
+        
+        fluidRow(
+          # shinythemes::themeSelector(),
+          column(
+            width = 6,
+            h2("Source R-Markdown"),
+            
+            # ace Themes
+            fluidRow(
+              column(width = 2,
+                     style = "padding-top: 5px;",
+                     tags$b("Editor Theme")),
+              column(
+                width = 3,
+                style = "padding-left: 0;",
+                selectInput(
+                  inputId = "aceThemeView",
+                  label = NULL,
+                  choices = getAceThemes(),
+                  selected = "dreamweaver",
+                  selectize = TRUE,
+                  width = "auto"
+                )
+              ),
+              column(
+                width = 3,
+                style = "padding-top: 5px; width: auto;",
+                tags$b("Editor Example")
+              ),
+              column(
+                width = 3,
+                style = "padding-left: 0;",
+                selectInput(
+                  inputId = "editorExampleView",
+                  label = NULL,
+                  choices = c("All Syntax" = "knitExample_Basic.Rmd", "R + MathJax" = "knitExample_Allfeatures.Rmd"),
+                  selectize = TRUE,
+                  width = "auto"
+                )
+              )
+              
+            ),
+            
+            # includeMarkdown(file.path("R", "sourceRmdWriteup.Rmd")),
+            
+            # uiOutput("rmdUIspace"),
+            
+            aceEditor(outputId = "rmdView",
+                      mode = "markdown", #"markdown", "r"
+                      value = initRmdExample,
+                      theme = "dreamweaver",
+                      readOnly = FALSE,
+                      fontSize = 12,
+                      wordWrap = TRUE,
+                      debounce = 1000,
+                      showLineNumbers = TRUE,
+                      highlightActiveLine = TRUE,
+                      autoScrollEditorIntoView = TRUE,
+                      minLines = 55,
+                      maxLines = 500,
+                      autoComplete = "enabled",
+                      # autoCompleteList = c("static", "keyword", "rlang", getNamespaceExports('ggplot2'), getNamespaceExports('dplyr'))
+                      autoCompleteList = c("static", "keyword", "rlang")
+            )
+            
+          ),
+          column(width = 6,
+                 h2("Knitted HTML Output"),
+                 
+                 htmlOutput("knitDocView")
+          )
+        )
+        
+      ), # close of tab 1
+      
+      # Tab 2 - Create ----
       tabPanel(
         title = "Create",
         icon = icon("edit"),
@@ -38,24 +117,9 @@ ui <- shinyUI(
                   selectize = TRUE,
                   width = "auto"
                 )
-              ),
-              
-              column(
-                width = 3,
-                style = "padding-top: 5px; width: auto;",
-                tags$b("Editor Example")
-              ),
-              column(
-                width = 3,
-                style = "padding-left: 0;",
-                selectInput(
-                  inputId = "editorExample",
-                  label = NULL,
-                  choices = c("All Syntax" = "knitExample_Basic.Rmd", "R + MathJax" = "knitExample_Allfeatures.Rmd"),
-                  selectize = TRUE,
-                  width = "auto"
-                )
               )
+              
+              
             ),
             
             includeMarkdown(file.path("R", "sourceRmdWriteup.Rmd")),
@@ -64,7 +128,8 @@ ui <- shinyUI(
             
             aceEditor(outputId = "rmd",
                       mode = "markdown", #"markdown", "r"
-                      value = initRmdExample,
+                      # value = initRmdExample,
+                      value = paste(readLines(file.path("R","knitExample_Create.Rmd")), collapse = "\n"),
                       theme = "textmate", #"dreamweaver",
                       readOnly = FALSE,
                       fontSize = 12,
@@ -87,8 +152,7 @@ ui <- shinyUI(
                  htmlOutput("knitDoc"))
         )
         
-        
-      ) # close of tab 1
+      ) # close of tab 2
       
       # # GitHub Widget ----
       # tabPanel(

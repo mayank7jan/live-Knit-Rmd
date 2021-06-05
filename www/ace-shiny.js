@@ -11,6 +11,17 @@ $(document).on('shiny:connected', function(event) {
         editor.navigateUp(2);
       }
     });
+    
+    var editorView = ace.edit("rmdView");
+    
+    editorView.commands.addCommand({
+      name: 'insertChunk',
+      bindKey: 'Ctrl-Alt-I',
+      exec: function(editorView) {
+        editorView.insert('```{r}\n\n```\n');
+        editorView.navigateUp(2);
+      }
+    });
   
   });
 });

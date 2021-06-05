@@ -1,54 +1,58 @@
 server <- function(input, output, session) {
   
+  ################################################################################################################
+  # Tab 1 - View ----
+  ################################################################################################################
+  
+  ## enable aceEditor additional functionalities
+  aceAutocomplete("rmdView")
+  aceTooltip("rmdView")
+  
+  observeEvent(input$editorExampleView,{
+    # works
+    updateAceEditor(session = session, editorId = "rmdView", value = paste(readLines(file.path("R",input$editorExampleView)), collapse = "\n"), border = "flash")
+  }, ignoreInit = TRUE)
+  
+  # update AceEditor Theme based on selection ----
+  observeEvent(input$aceThemeView,{
+    updateAceEditor(session = session, editorId = "rmdView", theme = input$aceThemeView)
+  }, ignoreInit = FALSE)
+  
+  
+  # Knit HTML document continously RHS ----
+  output$knitDocView <- renderUI({
+    # input$eval
+    if (length(input$rmdView) == 0L || input$rmdView == '')
+      return(NULL)
+    
+    HTML(
+      knitr::knit2html(
+        # text = isolate(input$rmd),
+        text = input$rmdView,
+        fragment.only = TRUE,
+        quiet = TRUE
+      ),
+      '<script>',
+      'MathJax.Hub.Queue(["Typeset", MathJax.Hub]); // update MathJax expressions',
+      '</script>'
+    )
+    
+  })
+  
+  
+  ################################################################################################################
+  # Tab 2 - Create ----
+  ################################################################################################################
+  
   ## enable aceEditor additional functionalities
   aceAutocomplete("rmd")
   aceTooltip("rmd")
   # aceAnnotate("rmd")
   
-  # Insert Ace Editor LHS ----
   # observeEvent(input$editorExample,{
-  #   
-  #   initRmdExample <- readLines(file.path("R",input$editorExample))
-  # 
-  #   output$rmdUIspace <- renderUI({
-  #     
-  #     aceEditor(outputId = "rmd",
-  #               mode = "markdown", #"markdown", "r"
-  #               value = initRmdExample,
-  #               theme = "textmate", #"dreamweaver",
-  #               readOnly = FALSE,
-  #               fontSize = 12,
-  #               wordWrap = TRUE,
-  #               debounce = 1000,
-  #               showLineNumbers = TRUE,
-  #               highlightActiveLine = TRUE,
-  #               autoScrollEditorIntoView = TRUE,
-  #               minLines = 55,
-  #               maxLines = 500,
-  #               autoComplete = "enabled",
-  #               # autoCompleteList = c("static", "keyword", "rlang", getNamespaceExports('ggplot2'), getNamespaceExports('dplyr'))
-  #               autoCompleteList = c("static", "keyword", "rlang")
-  #     )
-  #     
-  #   })
-  # 
-  # })
-  
-  observeEvent(input$editorExample,{
-    
-    # filePath <- file.path("R",input$editorExample)
-    # fileChars <- readChar(filePath, nchars = file.info(filePath)$size)
-    # # 
-    # isolate({
-    #   updateAceEditor(session = session, editorId = "rmd", value = fileChars, border = "flash")
-    # })
-    
-    # updateAceEditor(session = session, editorId = "rmd", value = readLines(file.path("R",input$editorExample)), border = "flash")
-    
-    # works
-    updateAceEditor(session = session, editorId = "rmd", value = paste(readLines(file.path("R",input$editorExample)), collapse = "\n"), border = "flash")
-    
-  }, ignoreInit = TRUE)
+  #   # works
+  #   updateAceEditor(session = session, editorId = "rmd", value = paste(readLines(file.path("R",input$editorExample)), collapse = "\n"), border = "flash")
+  # }, ignoreInit = TRUE)
   
   # update AceEditor Theme based on selection ----
   observeEvent(input$aceTheme,{
@@ -75,5 +79,6 @@ server <- function(input, output, session) {
     )
     
   })
+  
 
-}
+} # close server
