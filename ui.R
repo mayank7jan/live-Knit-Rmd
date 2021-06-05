@@ -16,51 +16,49 @@ ui <- shinyUI(
         title = "View",
         icon = icon("chalkboard"),
         
+        fluidRow(column(
+          style = "margin-top: 70px; padding: 0;",
+          width = 12,
+          column(width = 1,
+                 style = "padding-top: 5px; width: auto;",
+                 tags$b("Editor Theme")),
+          column(
+            width = 2,
+            style = "padding-left: 0;",
+            selectInput(
+              inputId = "aceThemeView",
+              label = NULL,
+              choices = getAceThemes(),
+              selected = "dreamweaver",
+              selectize = TRUE,
+              width = "auto"
+            )
+          ),
+          column(width = 1,
+                 style = "padding-top: 5px; width: auto;",
+                 tags$b("Editor Example")),
+          column(
+            width = 2,
+            style = "padding-left: 0;",
+            selectInput(
+              inputId = "editorExampleView",
+              label = NULL,
+              choices = c("All Syntax" = "knitExample_Basic.Rmd", "R + MathJax" = "knitExample_Allfeatures.Rmd"),
+              selectize = TRUE,
+              width = "60%"
+            )
+          )
+        )), 
+        
+        includeMarkdown(file.path("R", "sourceRmdWriteup.Rmd")),
+        
         fluidRow(
           # shinythemes::themeSelector(),
           column(
             width = 6,
             h2("Source R-Markdown"),
             
-            # ace Themes
-            fluidRow(
-              column(width = 2,
-                     style = "padding-top: 5px;",
-                     tags$b("Editor Theme")),
-              column(
-                width = 3,
-                style = "padding-left: 0;",
-                selectInput(
-                  inputId = "aceThemeView",
-                  label = NULL,
-                  choices = getAceThemes(),
-                  selected = "dreamweaver",
-                  selectize = TRUE,
-                  width = "auto"
-                )
-              ),
-              column(
-                width = 3,
-                style = "padding-top: 5px; width: auto;",
-                tags$b("Editor Example")
-              ),
-              column(
-                width = 3,
-                style = "padding-left: 0;",
-                selectInput(
-                  inputId = "editorExampleView",
-                  label = NULL,
-                  choices = c("All Syntax" = "knitExample_Basic.Rmd", "R + MathJax" = "knitExample_Allfeatures.Rmd"),
-                  selectize = TRUE,
-                  width = "auto"
-                )
-              )
-              
-            ),
-            
             # includeMarkdown(file.path("R", "sourceRmdWriteup.Rmd")),
-            
-            # uiOutput("rmdUIspace"),
             
             aceEditor(outputId = "rmdView",
                       mode = "markdown", #"markdown", "r"
@@ -80,6 +78,7 @@ ui <- shinyUI(
                       autoCompleteList = c("static", "keyword", "rlang")
             )
             
+            
           ),
           column(width = 6,
                  h2("Knitted HTML Output"),
@@ -95,37 +94,35 @@ ui <- shinyUI(
         title = "Create",
         icon = icon("edit"),
         
+        fluidRow(column(
+          style = "margin-top: 70px; padding: 0;",
+          width = 12,
+          
+          column(width = 1,
+                 style = "padding-top: 5px; width:auto;",
+                 tags$b("Editor Theme")),
+          column(
+            width = 2,
+            style = "padding-left: 0;",
+            selectInput(
+              inputId = "aceTheme",
+              label = NULL,
+              choices = getAceThemes(),
+              selected = "dreamweaver",
+              selectize = TRUE,
+              width = "auto"
+            )
+          )
+          
+        )),
+        
+        includeMarkdown(file.path("R", "sourceRmdWriteup.Rmd")),
+        
         fluidRow(
           # shinythemes::themeSelector(),
           column(
             width = 6,
             h2("Source R-Markdown"),
-            
-            # ace Themes
-            fluidRow(
-              column(width = 2,
-                     style = "padding-top: 5px;",
-                     tags$b("Editor Theme")),
-              column(
-                width = 3,
-                style = "padding-left: 0;",
-                selectInput(
-                  inputId = "aceTheme",
-                  label = NULL,
-                  choices = getAceThemes(),
-                  selected = "dreamweaver",
-                  selectize = TRUE,
-                  width = "auto"
-                )
-              )
-              
-              
-            ),
-            
-            includeMarkdown(file.path("R", "sourceRmdWriteup.Rmd")),
-            
-            # uiOutput("rmdUIspace"),
-            
             aceEditor(outputId = "rmd",
                       mode = "markdown", #"markdown", "r"
                       # value = initRmdExample,
@@ -144,11 +141,9 @@ ui <- shinyUI(
                       # autoCompleteList = c("static", "keyword", "rlang", getNamespaceExports('ggplot2'), getNamespaceExports('dplyr'))
                       autoCompleteList = c("static", "keyword", "rlang")
             )
-            
           ),
           column(width = 6,
                  h2("Knitted HTML Output"),
-                 
                  htmlOutput("knitDoc"))
         )
         
