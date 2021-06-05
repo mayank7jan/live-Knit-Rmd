@@ -26,7 +26,7 @@ ui <- shinyUI(
             fluidRow(
               column(width = 2,
                      style = "padding-top: 5px;",
-                     tags$b("Select Theme")),
+                     tags$b("Editor Theme")),
               column(
                 width = 3,
                 style = "padding-left: 0;",
@@ -42,8 +42,8 @@ ui <- shinyUI(
               
               column(
                 width = 3,
-                style = "padding-top: 5px;",
-                tags$b("Select Editor Example")
+                style = "padding-top: 5px; width: auto;",
+                tags$b("Editor Example")
               ),
               column(
                 width = 3,
