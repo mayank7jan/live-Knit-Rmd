@@ -2,6 +2,9 @@ ui <- shinyUI(
   fluidPage(
     
     # shinythemes::themeSelector(),
+    tags$div(id = "AppThemeSelector",
+             style = "display:none;",
+             shinythemes::themeSelector()),
     
     # Main application under Navigation Bar
     navbarPage(
@@ -53,9 +56,9 @@ ui <- shinyUI(
           # dummy space
           column(3),
           
-          tags$div(id = "AppThemeSelector",
-                   style = "display:none;",
-                   shinythemes::themeSelector()), 
+          # tags$div(id = "AppThemeSelector",
+          #          style = "display:none;",
+          #          shinythemes::themeSelector()), 
           
           column(
             width = 2,
@@ -189,7 +192,7 @@ ui <- shinyUI(
                       showLineNumbers = TRUE,
                       highlightActiveLine = TRUE,
                       autoScrollEditorIntoView = TRUE,
-                      minLines = 55,
+                      minLines = 35,
                       maxLines = 500,
                       autoComplete = "enabled",
                       # autoCompleteList = c("static", "keyword", "rlang", getNamespaceExports('ggplot2'), getNamespaceExports('dplyr'))
