@@ -60,7 +60,25 @@ ui <- shinyUI(
             
             includeMarkdown(file.path("R", "sourceRmdWriteup.Rmd")),
             
-            uiOutput("rmdUIspace")
+            # uiOutput("rmdUIspace"),
+            
+            aceEditor(outputId = "rmd",
+                      mode = "markdown", #"markdown", "r"
+                      value = initRmdExample,
+                      theme = "textmate", #"dreamweaver",
+                      readOnly = FALSE,
+                      fontSize = 12,
+                      wordWrap = TRUE,
+                      debounce = 1000,
+                      showLineNumbers = TRUE,
+                      highlightActiveLine = TRUE,
+                      autoScrollEditorIntoView = TRUE,
+                      minLines = 55,
+                      maxLines = 500,
+                      autoComplete = "enabled",
+                      # autoCompleteList = c("static", "keyword", "rlang", getNamespaceExports('ggplot2'), getNamespaceExports('dplyr'))
+                      autoCompleteList = c("static", "keyword", "rlang")
+            )
             
           ),
           column(width = 6,

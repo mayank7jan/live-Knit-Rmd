@@ -31,7 +31,11 @@ local({
 
 
 # initRmdExample <- readLines(file.path("R","knitExample_Allfeatures.Rmd"))
-# initRmdExample <- readLines(file.path("R","knitExample_Basic.Rmd"))
+initRmdExample <- readLines(file.path("R","knitExample_Basic.Rmd"))
+
+# filePath <- file.path("R","knitExample_Basic.Rmd")
+# fileChars <- readChar(filePath, nchars = file.info(filePath)$size)
+
 
 
 ########################################################################################################

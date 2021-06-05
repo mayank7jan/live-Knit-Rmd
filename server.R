@@ -5,39 +5,55 @@ server <- function(input, output, session) {
   aceTooltip("rmd")
   # aceAnnotate("rmd")
   
+  # Insert Ace Editor LHS ----
+  # observeEvent(input$editorExample,{
+  #   
+  #   initRmdExample <- readLines(file.path("R",input$editorExample))
+  # 
+  #   output$rmdUIspace <- renderUI({
+  #     
+  #     aceEditor(outputId = "rmd",
+  #               mode = "markdown", #"markdown", "r"
+  #               value = initRmdExample,
+  #               theme = "textmate", #"dreamweaver",
+  #               readOnly = FALSE,
+  #               fontSize = 12,
+  #               wordWrap = TRUE,
+  #               debounce = 1000,
+  #               showLineNumbers = TRUE,
+  #               highlightActiveLine = TRUE,
+  #               autoScrollEditorIntoView = TRUE,
+  #               minLines = 55,
+  #               maxLines = 500,
+  #               autoComplete = "enabled",
+  #               # autoCompleteList = c("static", "keyword", "rlang", getNamespaceExports('ggplot2'), getNamespaceExports('dplyr'))
+  #               autoCompleteList = c("static", "keyword", "rlang")
+  #     )
+  #     
+  #   })
+  # 
+  # })
+  
+  observeEvent(input$editorExample,{
+    
+    # filePath <- file.path("R",input$editorExample)
+    # fileChars <- readChar(filePath, nchars = file.info(filePath)$size)
+    # # 
+    # isolate({
+    #   updateAceEditor(session = session, editorId = "rmd", value = fileChars, border = "flash")
+    # })
+    
+    # updateAceEditor(session = session, editorId = "rmd", value = readLines(file.path("R",input$editorExample)), border = "flash")
+    
+    # works
+    updateAceEditor(session = session, editorId = "rmd", value = paste(readLines(file.path("R",input$editorExample)), collapse = "\n"), border = "flash")
+    
+  }, ignoreInit = TRUE)
+  
   # update AceEditor Theme based on selection ----
   observeEvent(input$aceTheme,{
     updateAceEditor(session = session, editorId = "rmd", theme = input$aceTheme)
-  }, ignoreInit = TRUE)
-  
-  # Insert Ace Editor LHS ----
-  observeEvent(input$editorExample,{
-    
-    initRmdExample <- readLines(file.path("R",input$editorExample))
-  
-    output$rmdUIspace <- renderUI({
-      
-      aceEditor(outputId = "rmd",
-                mode = "markdown", #"markdown", "r"
-                value = initRmdExample,
-                theme = "dreamweaver",
-                readOnly = FALSE,
-                fontSize = 12,
-                wordWrap = TRUE,
-                debounce = 1000,
-                showLineNumbers = TRUE,
-                highlightActiveLine = TRUE,
-                autoScrollEditorIntoView = TRUE,
-                minLines = 55,
-                maxLines = 500,
-                autoComplete = "enabled",
-                # autoCompleteList = c("static", "keyword", "rlang", getNamespaceExports('ggplot2'), getNamespaceExports('dplyr'))
-                autoCompleteList = c("static", "keyword", "rlang")
-      )
-      
-    })
-  
-  })
+  }, ignoreInit = FALSE)
   
   
   # Knit HTML document continously RHS ----
