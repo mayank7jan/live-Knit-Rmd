@@ -26,7 +26,12 @@ server <- function(input, output, session) {
   
   # update AceEditor Theme based on selection ----
   observeEvent(input$aceThemeView,{
+    # tab 1
     updateAceEditor(session = session, editorId = "rmdView", theme = input$aceThemeView)
+    # tab 2
+    # updateAceEditor(session = session, editorId = "rmd", theme = input$aceThemeView)
+    updateSelectInput(session = session, inputId = "aceTheme", selected = input$aceThemeView)
+    
   }, ignoreInit = FALSE)
   
   
