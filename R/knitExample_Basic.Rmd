@@ -1,4 +1,4 @@
-# A Minimal Example for Markdown
+# Markdown - All Basic Syntax Output
 
 This is a minimal example of using **knitr** to produce an _HTML_ page from _Markdown_.
 
