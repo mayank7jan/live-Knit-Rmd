@@ -91,5 +91,33 @@ server <- function(input, output, session) {
     
   })
   
+  
+  ## Download Button Handlers
+  
+  output$DownloadRmd <- downloadHandler(
+    filename = function() {
+      paste0("Blog_",Sys.Date(),".Rmd")
+    },
+    content = function(file) {
+      writeLines(text = input$rmd, con = file)
+    }
+  )
+  
+  output$DownloadHTML <- downloadHandler(
+    filename = function() {
+      paste0("Blog_View_",Sys.Date(),".html")
+    },
+    content = function(file) {
+      writeLines(
+        text = knitr::knit2html(
+          text = input$rmd,
+          fragment.only = TRUE,
+          quiet = TRUE
+        ),
+        con = file
+      )
+    }
+  )
+  
 
 } # close server

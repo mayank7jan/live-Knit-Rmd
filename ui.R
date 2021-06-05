@@ -148,7 +148,25 @@ ui <- shinyUI(
               selectize = TRUE,
               width = "auto"
             )
+          ),
+          
+          column(
+            width = 2,
+            style = "width:auto;",
+            downloadButton(
+              outputId = "DownloadRmd",
+              label = "Download R-Markdown file"
+            )
+          ),
+          column(
+            width = 2,
+            style = "width:auto;",
+            downloadButton(
+              outputId = "DownloadHTML",
+              label = "Download Knitted HTML"
+            )
           )
+          
           
         )),
         
