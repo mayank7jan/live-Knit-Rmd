@@ -36,7 +36,16 @@ initRmdExample <- readLines(file.path("R","knitExample_Basic.Rmd"))
 # filePath <- file.path("R","knitExample_Basic.Rmd")
 # fileChars <- readChar(filePath, nchars = file.info(filePath)$size)
 
+CustomJS <- list()
 
+# show/hide R functions
+CustomJS$show <- function(id = NULL, class = NULL, display = 'inherit', session = shiny::getDefaultReactiveDomain()){
+  if(!is.null(id)) session$sendCustomMessage(type = 'element_display_id', message = list(id = id, display = display))
+}
+
+CustomJS$hide <- function(id = NULL, class = NULL, session = shiny::getDefaultReactiveDomain()){
+  if(!is.null(id)) session$sendCustomMessage(type = 'element_display_id', message = list(id = id, display = 'none'))
+}
 
 ########################################################################################################
 ## Refernce Links

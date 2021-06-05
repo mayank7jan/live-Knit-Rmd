@@ -19,9 +19,10 @@ ui <- shinyUI(
         fluidRow(column(
           style = "margin-top: 70px; padding: 0;",
           width = 12,
+          
           column(width = 1,
                  style = "padding-top: 5px; width: auto;",
-                 tags$b("Editor Theme")),
+                 tags$b("Editor Theme")), 
           column(
             width = 2,
             style = "padding-left: 0;",
@@ -33,7 +34,7 @@ ui <- shinyUI(
               selectize = TRUE,
               width = "auto"
             )
-          ),
+          ), 
           column(width = 1,
                  style = "padding-top: 5px; width: auto;",
                  tags$b("Editor Example")),
@@ -47,7 +48,42 @@ ui <- shinyUI(
               selectize = TRUE,
               width = "60%"
             )
+          ),
+          
+          # dummy space
+          column(3),
+          
+          tags$div(id = "AppThemeSelector",
+                   style = "display:none;",
+                   shinythemes::themeSelector()), 
+          
+          column(
+            width = 2,
+            checkboxInput(
+              inputId = "appThemeToggle",
+              label = "Choose App Theme?",
+              width = "auto"
+            )
           )
+          
+          # column(width = 1,
+          #        style = "padding-top: 5px; width: auto;",
+          #        tags$b("App Theme")),
+          # column(
+          #   width = 2,
+          #   style = "padding-left: 0;",
+          #   selectInput(
+          #     inputId = "appTheme",
+          #     label = NULL,
+          #     choices = themeOpts,
+          #     selected = "cerulean",
+          #     selectize = TRUE,
+          #     # width = "60%"
+          #     width = "auto"
+          #   )
+          # )
+          
+          
         )), 
         
         includeMarkdown(file.path("R", "sourceRmdWriteup.Rmd")),
@@ -119,7 +155,7 @@ ui <- shinyUI(
         includeMarkdown(file.path("R", "sourceRmdWriteup.Rmd")),
         
         fluidRow(
-          # shinythemes::themeSelector(),
+          
           column(
             width = 6,
             h2("Source R-Markdown"),
@@ -185,7 +221,8 @@ ui <- shinyUI(
     tags$script(src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML",
                 type = 'text/javascript'),
     # custom project js file
-    tags$script(src = 'ace-shiny.js', type = 'text/javascript')
+    tags$script(src = 'ace-shiny.js', type = 'text/javascript'),
+    tags$script(src = 'shiny.js', type = 'text/javascript')
   
     
   ) # close top level fluidPage

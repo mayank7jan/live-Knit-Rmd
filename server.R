@@ -1,5 +1,15 @@
 server <- function(input, output, session) {
   
+  # show/hide app theme selector
+  observeEvent(input$appThemeToggle,{
+    if(isTRUE(input$appThemeToggle)){
+      CustomJS$show(id = "AppThemeSelector")
+    } else {
+      CustomJS$hide(id = "AppThemeSelector")
+    }
+  })
+  
+  
   ################################################################################################################
   # Tab 1 - View ----
   ################################################################################################################
@@ -8,6 +18,7 @@ server <- function(input, output, session) {
   aceAutocomplete("rmdView")
   aceTooltip("rmdView")
   
+  # update Example selection
   observeEvent(input$editorExampleView,{
     # works
     updateAceEditor(session = session, editorId = "rmdView", value = paste(readLines(file.path("R",input$editorExampleView)), collapse = "\n"), border = "flash")
