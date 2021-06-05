@@ -6,7 +6,7 @@ library(markdown)
 library(rmarkdown)
 library(knitr)
 library(ggplot2)
-
+library(shinythemes)
 
 ########################################################################################################
 # update cran mirror
@@ -37,5 +37,6 @@ local({
 ########################################################################################################
 ## Refernce Links
 # https://ace.c9.io/#nav=embedding
+# https://rstudio.github.io/shinythemes/
 
 ########################################################################################################

@@ -10,6 +10,7 @@ server <- function(input, output, session) {
     updateAceEditor(session = session, editorId = "rmd", theme = input$aceTheme)
   }, ignoreInit = TRUE)
   
+  # Insert Ace Editor LHS ----
   observeEvent(input$editorExample,{
     
     initRmdExample <- readLines(file.path("R",input$editorExample))
@@ -39,7 +40,7 @@ server <- function(input, output, session) {
   })
   
   
-  # Knit HTML document continously ----
+  # Knit HTML document continously RHS ----
   output$knitDoc <- renderUI({
     # input$eval
     if (length(input$rmd) == 0L || input$rmd == '')
