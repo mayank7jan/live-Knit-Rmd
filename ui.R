@@ -6,6 +6,13 @@ ui <- shinyUI(
              style = "display:none;",
              shinythemes::themeSelector()),
     
+    # change browser tab icon
+    tags$head(
+      tags$link(rel = 'icon',
+                type = 'image/png',
+                href = 'pencil.png')
+    ),
+    
     # Main application under Navigation Bar
     navbarPage(
       windowTitle = "Live Markdown App",
