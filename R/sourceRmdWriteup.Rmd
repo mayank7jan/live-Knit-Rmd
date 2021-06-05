@@ -1,0 +1,3 @@
+The knit **HTML** output on the right hand side is continously updated from the R markdown editor below, so that you can see your changes live as you type.
+
+Press `Ctrl+Alt+I` to insert a `r` code chunk.
