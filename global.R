@@ -7,6 +7,7 @@ library(rmarkdown)
 library(knitr)
 library(ggplot2)
 library(shinythemes)
+library(rsconnect)
 
 ########################################################################################################
 # update cran mirror
