@@ -125,8 +125,7 @@ server <- function(input, output, session) {
   )
   
   # # auto save RMD file
-  # observeEvent(input$rmd,{
-  #   # paste(readLines(file.path("R","knitExample_Create.Rmd")), collapse = "\n")
+  # observeEvent(input$rmd,{   
   #   
   #   if (length(input$rmd) == 0L || input$rmd == '')
   #     return(NULL)

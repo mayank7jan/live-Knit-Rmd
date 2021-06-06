@@ -52,3 +52,12 @@ The Markdown application is deployed and live at [shinyapps.io](https://mayankag
 #### App Themes
 
 [![appThemes](images/ScreenShot-4.png)](https://mayankagrawalbond.shinyapps.io/live-knit-rmd/)
+
+
+
+##### Application References
+
+This application uses two major chunks in its implementation, as follows.
+
+1. **Ace Editor** - [shinyAce](https://github.com/trestletech/shinyAce) is a R package wrapper to implement the live text editor input section.
+2. [**knitr**](https://github.com/yihui/knitr) - R package to convert markdown documents to various formats such as - .docx, .ppt, HTML, ioslides among a few other. Here, we specifically knit it to HTML for live preview update. [Here](https://github.com/yihui/knitr/tree/master/inst/shiny) is the repo for the simple implementation of it via more web dev route, from 8 years ago. 
