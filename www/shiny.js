@@ -13,3 +13,14 @@ $(document).on('shiny:connected', function(event) {
     HTMLinner[0].className = "fa fa-file-download";
   });
 });
+
+
+/*Tab Links display to none*/
+var CustomRightTabPanel = $('a[data-value^="CustomRightTabPanel"]');
+if( CustomRightTabPanel.length > 0 ) {
+  CustomRightTabPanel.each(function () {
+        $( this )[0].style.display = "none";
+        $( this ).parent().addClass('Custom-tabPanel-right');
+   });
+}
+

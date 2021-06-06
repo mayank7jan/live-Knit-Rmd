@@ -211,31 +211,19 @@ ui <- shinyUI(
                  htmlOutput("knitDoc"))
         )
         
-      ) # close of tab 2
+      ), # close of tab 2
       
-      # # GitHub Widget ----
-      # tabPanel(
-      # # tags$li(
-      #   # style = "float: right !important; display: inline-flex !important;",
-      #   # class = "Custom-tabPanel-right",
-      #   
-      #   # tags$div(
-      #   # title = 'GitHub',
-      #   # onclick ="window.open('https://github.com/mayank7jan/live-Knit-Rmd')",
-      #   # target = "_blank",
-      #   # icon('github')
-      #   # )
-      #   
-      #   title = span(a(
-      #     id = "github_id",
-      #     title = 'GitHub',
-      #     href = "https://github.com/mayank7jan/live-Knit-Rmd",
-      #     target = "_blank",
-      #     icon('github')
-      #     # class = "Custom-tabPanel-right"
-      #     # style = "float: right !important; display: inline-flex !important;"
-      #   ))
-      # )
+      # GitHub Widget Tab last ----
+      tabPanel(
+        value = "CustomRightTabPanelGitHub",
+        title = a(
+          id = "github_id",
+          title = 'GitHub',
+          href = "https://github.com/mayank7jan/live-Knit-Rmd",
+          target = "_blank",
+          icon('github')
+        )
+      ) # close tabPanel GitHub
       
     ), # navbarPage close
     
