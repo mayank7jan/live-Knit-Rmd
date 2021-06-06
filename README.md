@@ -45,7 +45,7 @@ Additional fun features of this application are -
 
 ## Website
 
-The Data Science dashbaord is deployed and live at
+The Markdown application is deployed and live at
 [shinyapps.io](https://mayankagrawalbond.shinyapps.io/live-knit-rmd/)
 
 ## [Dashboard Screenshots](https://mayankagrawalbond.shinyapps.io/live-knit-rmd/)
